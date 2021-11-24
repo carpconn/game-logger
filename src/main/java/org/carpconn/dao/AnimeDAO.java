@@ -1,5 +1,6 @@
 package org.carpconn.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.carpconn.model.Anime;
 
 /**
@@ -9,12 +10,12 @@ import org.carpconn.model.Anime;
  */
 public interface AnimeDAO {
 
-    void createAnime(Anime anime);
+    Anime create(@Param("anime") Anime anime);
 
-    Anime findAnime(int animeId);
+    Anime findAnime(@Param("animeId") int animeId);
 
-    void updateAnime(Anime anime);
+    Anime update(@Param("anime") Anime anime);
 
-    void deleteAnime(int animeId);
+    void delete(@Param("animeId") int animeId);
 
 }
