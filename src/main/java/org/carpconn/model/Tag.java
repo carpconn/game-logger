@@ -1,43 +1,54 @@
-/*
- * This file is copyright (c) 2021 of Sheetz Inc.
- */
 package org.carpconn.model;
+
+import java.util.Objects;
 
 /**
  * Tag
- * <p>
- * [insert class comment here...]
  *
  * @author carpc on 11/23/2021
  */
 public class Tag {
+    private Integer tagId;
     private String name;
 
-    public Tag(String name) {
-        this.name = name;
+    public Tag() {
+    }
+
+    public Integer getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(Integer tagId) {
+        this.tagId = tagId;
     }
 
     public String getName() {
         return name;
     }
 
-    public static final class Builder {
-        private String name;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        private Builder() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Tag tag = (Tag) o;
+        return tagId.equals(tag.tagId) && name.equals(tag.name);
+    }
 
-        public static Builder builder() {
-            return new Builder();
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(tagId, name);
+    }
 
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Tag build() {
-            return new Tag(name);
-        }
+    @Override
+    public String toString() {
+        return "Tag{" + "tagId=" + tagId + ", name='" + name + '\'' + '}';
     }
 }

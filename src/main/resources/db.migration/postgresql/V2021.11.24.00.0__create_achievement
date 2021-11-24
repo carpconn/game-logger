@@ -1,0 +1,7 @@
+CREATE TABLE achievement
+(
+    achievement_id INT IDENTITY (1,1) NOT NULL,
+    title          varchar(128),
+    description    varchar(1024),
+    CONSTRAINT PK_achievement_id PRIMARY KEY (achievement_id)
+);

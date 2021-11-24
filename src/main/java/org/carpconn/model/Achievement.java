@@ -1,50 +1,64 @@
 package org.carpconn.model;
 
+import java.util.Objects;
+
 /**
  * Achievement
  *
  * @author carpc on 11/23/2021
  */
 public class Achievement {
+    private Integer achievementId;
     private String title;
     private String description;
 
-    public Achievement(String title, String description) {
-        this.title = title;
-        this.description = description;
+    public Achievement() {
+    }
+
+    public Integer getAchievementId() {
+        return achievementId;
+    }
+
+    public void setAchievementId(Integer achievementId) {
+        this.achievementId = achievementId;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDescription() {
         return description;
     }
 
-    public static final class Builder {
-        private String title;
-        private String description;
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-        private Builder() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Achievement that = (Achievement) o;
+        return achievementId.equals(that.achievementId) && title.equals(that.title) && Objects.equals(description, that.description);
+    }
 
-        public static Builder builder() {
-            return new Builder();
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(achievementId, title, description);
+    }
 
-        public Builder title(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public Builder description(String description) {
-            this.description = description;
-            return this;
-        }
-
-        public Achievement build() {
-            return new Achievement(title, description);
-        }
+    @Override
+    public String toString() {
+        return "Achievement{" + "achievementId=" + achievementId + ", title='" + title + '\'' + ", description='" + description + '\''
+                + '}';
     }
 }

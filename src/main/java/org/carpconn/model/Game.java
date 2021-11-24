@@ -2,6 +2,7 @@ package org.carpconn.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Game
@@ -9,28 +10,19 @@ import java.util.List;
  * @author carpc on 11/23/2021
  */
 public class Game {
-    private int gameId;
+    private Integer gameId;
     private String name;
     private Date startDate;
     private Date endDate;
     private List<Achievement> achievements;
     private List<Tag> tags;
-    private double hoursPlayed;
-    private short rating;
+    private Double hoursPlayed;
+    private Double rating;
 
-    public Game(int gameId, String name, Date startDate, Date endDate, List<Achievement> achievements, List<Tag> tags,
-                double hoursPlayed, short rating) {
-        this.gameId = gameId;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.achievements = achievements;
-        this.tags = tags;
-        this.hoursPlayed = hoursPlayed;
-        this.rating = rating;
+    public Game() {
     }
 
-    public int getGameId() {
+    public Integer getGameId() {
         return gameId;
     }
 
@@ -54,73 +46,68 @@ public class Game {
         return tags;
     }
 
-    public double getHoursPlayed() {
+    public Double getHoursPlayed() {
         return hoursPlayed;
     }
 
-    public short getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public static final class Builder {
-        private int gameId;
-        private String name;
-        private Date startDate;
-        private Date endDate;
-        private List<Achievement> achievements;
-        private List<Tag> tags;
-        private double hoursPlayed;
-        private short rating;
+    public void setGameId(Integer gameId) {
+        this.gameId = gameId;
+    }
 
-        private Builder() {
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public static Builder builder() {
-            return new Builder();
-        }
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
-        public Builder gameId(int gameId) {
-            this.gameId = gameId;
-            return this;
-        }
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
+    public void setAchievements(List<Achievement> achievements) {
+        this.achievements = achievements;
+    }
 
-        public Builder startDate(Date startDate) {
-            this.startDate = startDate;
-            return this;
-        }
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 
-        public Builder endDate(Date endDate) {
-            this.endDate = endDate;
-            return this;
-        }
+    public void setHoursPlayed(Double hoursPlayed) {
+        this.hoursPlayed = hoursPlayed;
+    }
 
-        public Builder achievements(List<Achievement> achievements) {
-            this.achievements = achievements;
-            return this;
-        }
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
 
-        public Builder tags(List<Tag> tags) {
-            this.tags = tags;
-            return this;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Game game = (Game) o;
+        return gameId.equals(game.gameId) && name.equals(game.name) && Objects.equals(startDate, game.startDate) && Objects.equals(
+                endDate, game.endDate) && Objects.equals(achievements, game.achievements) && Objects.equals(tags, game.tags)
+                && hoursPlayed.equals(game.hoursPlayed) && Objects.equals(rating, game.rating);
+    }
 
-        public Builder hoursPlayed(double hoursPlayed) {
-            this.hoursPlayed = hoursPlayed;
-            return this;
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(gameId, name, startDate, endDate, achievements, hoursPlayed, rating);
+    }
 
-        public Builder rating(short rating) {
-            this.rating = rating;
-            return this;
-        }
-
-        public Game build() {
-            return new Game(gameId, name, startDate, endDate, achievements, tags, hoursPlayed, rating);
-        }
+    @Override
+    public String toString() {
+        return "Game{" + "gameId=" + gameId + ", name='" + name + '\'' + ", startDate=" + startDate + ", endDate=" + endDate
+                + ", achievements=" + achievements + ", tags=" + tags + ", hoursPlayed=" + hoursPlayed + ", rating=" + rating + '}';
     }
 }

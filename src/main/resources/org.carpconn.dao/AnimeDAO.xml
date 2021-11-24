@@ -3,6 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.carpconn.dao.AnimeDAO"/>
+<mapper namespace="org.carpconn.dao.AnimeDAO">
 
+    <resultMap id="map" type="Anime">
+        <id property="animeId" column="anime_id"/>
+        <result property="totalEpisodes" column="total_episodes"/>
+        <result property="currentEpisode" column="current_episode"/>
+        <result property="name" column="name"/>
+        <result property="startDate" column="start_date" javaType="java.util.Date"/>
+        <result property="endDate" column="end_date" javaType="java.util.Date"/>
+        <result property="rating" column="rating"/>
+        <collection property="tags" javaType="ArrayList" ofType="org.carpconn.model.Tag">
+            <result column="tags"/>
+        </collection>
+    </resultMap>
+
+    <sql id="animeColumns">
+        an.anime_id
+        an.total_episodes,
+        an.current_episode,
+        an.name,
+        an.start_date,
+        an.end_date,
+        an.rating
+    </sql>
+
+    <sql id="from">
+        FROM anime an
+    </sql>
+
+    <sql id="selectBase">
+        SELECT
+        <include refid="animeColumns"/>
+        <include refid="from"/>
+    </sql>
+
+</mapper>
 

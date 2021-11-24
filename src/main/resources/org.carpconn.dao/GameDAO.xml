@@ -3,6 +3,42 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.carpconn.dao.GameDAO"/>
+<mapper namespace="org.carpconn.dao.GameDAO">
+
+    <resultMap id="map" type="Game">
+        <id property="gameId" column="game_id"/>
+        <result property="name" column="name"/>
+        <result property="startDate" column="start_date" javaType="java.util.Date"/>
+        <result property="endDate" column="end_date" javaType="java.util.Date"/>
+        <result property="rating" column="rating"/>
+        <result property="hoursPlayed" column="hours_played"/>
+        <collection property="tags" javaType="ArrayList" ofType="org.carpconn.model.Tag">
+            <result column="tags"/>
+        </collection>
+        <collection property="achievements" javaType="ArrayList" ofType="org.carpconn.model.Achievement">
+            <result column="achievements"/>
+        </collection>
+    </resultMap>
+
+    <sql id="gameColumns">
+        ga.game_id,
+        ga.name,
+        ga.start_date,
+        ga.end_date,
+        ga.rating,
+        ga.hours_played
+    </sql>
+
+    <sql id="from">
+        FROM game ga
+    </sql>
+
+    <sql id="selectBase">
+        SELECT
+        <include refid="gameColumns"/>
+        <include refid="from"/>
+    </sql>
+
+</mapper>
 
 

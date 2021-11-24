@@ -2,6 +2,7 @@ package org.carpconn.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Anime
@@ -9,118 +10,105 @@ import java.util.List;
  * @author carpc on 11/23/2021
  */
 public class Anime {
-    private int animeId;
+    private Integer animeId;
     private List<Tag> tags;
-    private int totalEpisodes;
-    private int currentEpisode;
+    private Integer totalEpisodes;
+    private Integer currentEpisode;
     private String name;
     private Date startDate;
     private Date endDate;
-    private short rating;
+    private Double rating;
 
-    public Anime(int animeId, List<Tag> tags, int totalEpisodes, int currentEpisode, String name, Date startDate, Date endDate,
-                 short rating) {
-        this.animeId = animeId;
-        this.tags = tags;
-        this.totalEpisodes = totalEpisodes;
-        this.currentEpisode = currentEpisode;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.rating = rating;
+    public Anime() {
     }
 
-    public int getAnimeId() {
+    public Integer getAnimeId() {
         return animeId;
+    }
+
+    public void setAnimeId(Integer animeId) {
+        this.animeId = animeId;
     }
 
     public List<Tag> getTags() {
         return tags;
     }
 
-    public int getTotalEpisodes() {
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public Integer getTotalEpisodes() {
         return totalEpisodes;
     }
 
-    public int getCurrentEpisode() {
+    public void setTotalEpisodes(Integer totalEpisodes) {
+        this.totalEpisodes = totalEpisodes;
+    }
+
+    public Integer getCurrentEpisode() {
         return currentEpisode;
+    }
+
+    public void setCurrentEpisode(Integer currentEpisode) {
+        this.currentEpisode = currentEpisode;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Date getStartDate() {
         return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public Date getEndDate() {
         return endDate;
     }
 
-    public short getRating() {
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Double getRating() {
         return rating;
     }
 
-    public static final class Builder {
-        private int animeId;
-        private List<Tag> tags;
-        private int totalEpisodes;
-        private int currentEpisode;
-        private String name;
-        private Date startDate;
-        private Date endDate;
-        private short rating;
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
 
-        private Builder() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Anime anime = (Anime) o;
+        return animeId.equals(anime.animeId) && Objects.equals(tags, anime.tags) && totalEpisodes.equals(anime.totalEpisodes)
+                && currentEpisode.equals(anime.currentEpisode) && name.equals(anime.name) && Objects.equals(startDate, anime.startDate)
+                && Objects.equals(endDate, anime.endDate) && Objects.equals(rating, anime.rating);
+    }
 
-        public static Builder builder() {
-            return new Builder();
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(animeId, totalEpisodes, currentEpisode, name, startDate, endDate, rating);
+    }
 
-        public Builder animeId(int animeId) {
-            this.animeId = animeId;
-            return this;
-        }
-
-        public Builder tags(List<Tag> tags) {
-            this.tags = tags;
-            return this;
-        }
-
-        public Builder totalEpisodes(int totalEpisodes) {
-            this.totalEpisodes = totalEpisodes;
-            return this;
-        }
-
-        public Builder currentEpisode(int currentEpisode) {
-            this.currentEpisode = currentEpisode;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder startDate(Date startDate) {
-            this.startDate = startDate;
-            return this;
-        }
-
-        public Builder endDate(Date endDate) {
-            this.endDate = endDate;
-            return this;
-        }
-
-        public Builder rating(short rating) {
-            this.rating = rating;
-            return this;
-        }
-
-        public Anime build() {
-            return new Anime(animeId, tags, totalEpisodes, currentEpisode, name, startDate, endDate, rating);
-        }
+    @Override
+    public String toString() {
+        return "Anime{" + "animeId=" + animeId + ", tags=" + tags + ", totalEpisodes=" + totalEpisodes + ", currentEpisode="
+                + currentEpisode + ", name='" + name + '\'' + ", startDate=" + startDate + ", endDate=" + endDate + ", rating="
+                + rating + '}';
     }
 }

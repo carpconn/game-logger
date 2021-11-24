@@ -1,6 +1,8 @@
 package org.carpconn.model;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Manga
@@ -8,93 +10,105 @@ import java.util.List;
  * @author carpc on 11/23/2021
  */
 public class Manga {
-    private int mangaId;
+    private Integer mangaId;
     private List<Tag> tags;
-    private int currentChapter;
-    private int totalChapters;
+    private Integer currentChapter;
+    private Integer totalChapters;
     private String name;
-    private int rating;
+    private Double rating;
+    private Date startDate;
+    private Date endDate;
 
-    public Manga(int mangaId, List<Tag> tags, int currentChapter, int totalChapters, String name, int rating) {
-        this.mangaId = mangaId;
-        this.tags = tags;
-        this.currentChapter = currentChapter;
-        this.totalChapters = totalChapters;
-        this.name = name;
-        this.rating = rating;
+    public Manga() {
     }
 
-    public int getMangaId() {
+    public Integer getMangaId() {
         return mangaId;
+    }
+
+    public void setMangaId(Integer mangaId) {
+        this.mangaId = mangaId;
     }
 
     public List<Tag> getTags() {
         return tags;
     }
 
-    public int getCurrentChapter() {
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public Integer getCurrentChapter() {
         return currentChapter;
     }
 
-    public int getTotalChapters() {
+    public void setCurrentChapter(Integer currentChapter) {
+        this.currentChapter = currentChapter;
+    }
+
+    public Integer getTotalChapters() {
         return totalChapters;
+    }
+
+    public void setTotalChapters(Integer totalChapters) {
+        this.totalChapters = totalChapters;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getRating() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getRating() {
         return rating;
     }
 
-    public static final class Builder {
-        private int mangaId;
-        private List<Tag> tags;
-        private int currentChapter;
-        private int totalChapters;
-        private String name;
-        private int rating;
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
 
-        private Builder() {
-        }
+    public Date getStartDate() {
+        return startDate;
+    }
 
-        public static Builder builder() {
-            return new Builder();
-        }
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
-        public Builder mangaId(int mangaId) {
-            this.mangaId = mangaId;
-            return this;
-        }
+    public Date getEndDate() {
+        return endDate;
+    }
 
-        public Builder tags(List<Tag> tags) {
-            this.tags = tags;
-            return this;
-        }
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
-        public Builder currentChapter(int currentChapter) {
-            this.currentChapter = currentChapter;
-            return this;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Manga manga = (Manga) o;
+        return mangaId.equals(manga.mangaId) && Objects.equals(tags, manga.tags) && currentChapter.equals(manga.currentChapter)
+                && totalChapters.equals(manga.totalChapters) && name.equals(manga.name) && Objects.equals(rating, manga.rating)
+                && Objects.equals(startDate, manga.startDate) && Objects.equals(endDate, manga.endDate);
+    }
 
-        public Builder totalChapters(int totalChapters) {
-            this.totalChapters = totalChapters;
-            return this;
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(mangaId, currentChapter, totalChapters, name, rating, startDate, endDate);
+    }
 
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder rating(int rating) {
-            this.rating = rating;
-            return this;
-        }
-
-        public Manga build() {
-            return new Manga(mangaId, tags, currentChapter, totalChapters, name, rating);
-        }
+    @Override
+    public String toString() {
+        return "Manga{" + "mangaId=" + mangaId + ", tags=" + tags + ", currentChapter=" + currentChapter + ", totalChapters="
+                + totalChapters + ", name='" + name + '\'' + ", rating=" + rating + ", startDate=" + startDate + ", endDate=" + endDate
+                + '}';
     }
 }
