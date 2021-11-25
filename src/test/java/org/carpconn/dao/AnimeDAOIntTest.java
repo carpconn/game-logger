@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class AnimeDAOIntTest {
 
-    AnimeDAO animeDAO;
+    SqlMapAnimeDAO sqlMapAnimeDAO;
 
     @BeforeEach
     public void setupTests() {
@@ -26,7 +26,7 @@ public class AnimeDAOIntTest {
         anime.setCurrentEpisode(0);
         anime.setName("Princess Mononoke");
         anime.setTotalEpisodes(10);
-        Anime createdAnime = animeDAO.create(anime);
+        Anime createdAnime = sqlMapAnimeDAO.create(anime);
         assertNotNull(createdAnime.getAnimeId());
         assertEquals(createdAnime.getName(), anime.getName());
         assertEquals(createdAnime.getCurrentEpisode(), anime.getCurrentEpisode());

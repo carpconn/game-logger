@@ -16,6 +16,6 @@ public interface AnimeDAO {
 
     Anime update(@Param("anime") Anime anime);
 
-    void delete(@Param("animeId") int animeId);
+    boolean delete(@Param("animeId") int animeId);
 
 }
