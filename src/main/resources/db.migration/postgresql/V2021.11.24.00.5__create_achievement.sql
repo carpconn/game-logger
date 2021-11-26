@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS achievement;
-
-CREATE TABLE achievement
+CREATE TABLE IF NOT EXISTS achievement
 (
     achievement_id INT PRIMARY KEY,
     game_id        INT NOT NULL,

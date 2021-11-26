@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS tag;
-
-CREATE TABLE tag
+CREATE TABLE IF NOT EXISTS tag
 (
     tag_id   INT PRIMARY KEY,
     game_id  INT,

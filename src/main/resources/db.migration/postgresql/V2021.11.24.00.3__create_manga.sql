@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS manga;
-
-CREATE TABLE manga
+CREATE TABLE IF NOT EXISTS manga
 (
     manga_id        INT PRIMARY KEY,
     current_chapter INT NOT NULL,

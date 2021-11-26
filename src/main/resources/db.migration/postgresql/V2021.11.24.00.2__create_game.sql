@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS game;
-
-CREATE TABLE game
+CREATE TABLE IF NOT EXISTS game
 (
     game_id      INT PRIMARY KEY,
     name         varchar(128) NOT NULL,

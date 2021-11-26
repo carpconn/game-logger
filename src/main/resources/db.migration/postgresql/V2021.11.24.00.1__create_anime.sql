@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS anime;
-
-CREATE TABLE anime
+CREATE TABLE IF NOT EXISTS anime
 (
     anime_id        INT PRIMARY KEY,
     total_episodes  INT NOT NULL,
