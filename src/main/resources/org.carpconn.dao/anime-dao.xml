@@ -5,7 +5,7 @@
 
 <mapper namespace="org.carpconn.dao.AnimeDAO">
 
-    <resultMap id="map" type="Anime">
+    <resultMap id="map" type="org.carpconn.model.Anime">
         <id property="animeId" column="anime_id"/>
         <result property="totalEpisodes" column="total_episodes"/>
         <result property="currentEpisode" column="current_episode"/>
@@ -19,57 +19,52 @@
     </resultMap>
 
     <sql id="animeColumns">
-        an.anime_id
-        an.total_episodes,
-        an.current_episode,
-        an.name,
-        an.start_date,
-        an.end_date,
-        an.rating
+        anime.anime_id,
+        anime.total_episodes,
+        anime.current_episode,
+        anime.name,
+        anime.start_date,
+        anime.end_date,
+        anime.rating
     </sql>
 
     <sql id="tagColumns">
-        ta.tag_id,
-        ta.anime_id,
-        ta.name
+        tag.tag_id,
+        tag.anime_id,
+        tag.name
     </sql>
 
     <sql id="from">
-        FROM anime an
-            JOIN tags ta ON an.anime_id = ta.anime_id
+        FROM anime
+            LEFT JOIN tag ON anime.anime_id = tag.anime_id
     </sql>
 
     <sql id="selectBase">
         SELECT
-        <include refid="animeColumns"/>
+        <include refid="animeColumns"/>,
         <include refid="tagColumns"/>
         <include refid="from"/>
     </sql>
 
-    <insert id="create" useGeneratedKeys="true" keyProperty="anime.animeId" keyColumn="anime_id">
-        INSERT INTO anime (total_episodes, current_episode, name, start_date, end_date, rating)
-        VALUES (#{anime.totalEpisodes}, #{anime.currentEpisode}, #{anime.name}, #{anime.startDate}, #{anime.endDate}, #{anime.rating})
-    </insert>
-
-    <select id="findAnime">
+    <select id="findAnime" resultMap="map">
         <include refid="selectBase"/>
-        WHERE an.anime_id = #{animeId}
+        WHERE anime.anime_id = #{animeId}
     </select>
 
     <update id="update">
-        UPDATE anime an
-        SET an.name = #{anime.name},
-            an.total_episodes = #{anime.totalEpsiodes},
-            an.current_episode = #{anime.currentEpisode},
-            an.start_date = #{anime.startDate},
-            an.end_date = #{anime.endDate},
-            an.rating = #{anime.rating}
-        WHERE an.anime_id = #{anime.animeId}
+        UPDATE anime
+        SET name = #{anime.name},
+            total_episodes = #{anime.totalEpsiodes},
+            current_episode = #{anime.currentEpisode},
+            start_date = #{anime.startDate},
+            end_date = #{anime.endDate},
+            rating = #{anime.rating}
+        WHERE anime_id = #{anime.animeId}
     </update>
 
     <delete id="delete">
-        DELETE FROM anime an
-        WHERE an.anime_id = #{animeId}
+        DELETE FROM anime
+        WHERE anime_id = #{animeId}
     </delete>
 
 </mapper>

@@ -5,7 +5,7 @@
 
 <mapper namespace="org.carpconn.dao.MangaDAO">
 
-    <resultMap id="map" type="Manga">
+    <resultMap id="map" type="org.carpconn.model.Manga">
         <id property="mangaId" column="manga_id"/>
         <result property="totalChapters" column="total_chapters"/>
         <result property="currentChapter" column="current_chapter"/>

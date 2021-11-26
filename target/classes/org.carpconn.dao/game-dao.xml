@@ -5,7 +5,7 @@
 
 <mapper namespace="org.carpconn.dao.GameDAO">
 
-    <resultMap id="map" type="Game">
+    <resultMap id="map" type="org.carpconn.model.Game">
         <id property="gameId" column="game_id"/>
         <result property="name" column="name"/>
         <result property="startDate" column="start_date" javaType="java.util.Date"/>

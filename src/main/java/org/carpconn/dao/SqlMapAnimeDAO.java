@@ -3,6 +3,7 @@ package org.carpconn.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.carpconn.model.Anime;
+import org.carpconn.sqlsession.SqlSessionFactorySingleton;
 
 import static java.util.Objects.isNull;
 
@@ -16,18 +17,18 @@ import static java.util.Objects.isNull;
 public class SqlMapAnimeDAO implements AnimeDAO{
     private SqlSessionFactory factory;
 
-    public SqlMapAnimeDAO(SqlSessionFactory factory) {
+    public SqlMapAnimeDAO() {
         /* This factory should be a singleton; DO NOT duplicate a factory! */
-        this.factory = factory;
+        factory = SqlSessionFactorySingleton.getInstance();
     }
 
     @Override
-    public Anime create(Anime anime) {
+    public int create(Anime anime) {
         SqlSession sqlSession = factory.openSession();
         AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
-        Anime createdAnime = animeDAO.create(anime);
+        int createdAnimeId = animeDAO.create(anime);
         sqlSession.close();
-        return createdAnime;
+        return createdAnimeId;
     }
 
     @Override
@@ -40,12 +41,12 @@ public class SqlMapAnimeDAO implements AnimeDAO{
     }
 
     @Override
-    public Anime update(Anime anime) {
+    public int update(Anime anime) {
         SqlSession sqlSession = factory.openSession();
         AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
-        Anime updatedAnime = animeDAO.update(anime);
+        int updatedAnimeId = animeDAO.update(anime);
         sqlSession.close();
-        return updatedAnime;
+        return updatedAnimeId;
     }
 
     @Override

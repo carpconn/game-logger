@@ -1,7 +1,7 @@
 package org.carpconn.dao;
 
 import org.carpconn.model.Anime;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,10 +14,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public class AnimeDAOIntTest {
 
-    SqlMapAnimeDAO sqlMapAnimeDAO;
+    static SqlMapAnimeDAO sqlMapAnimeDAO;
 
-    @BeforeEach
-    public void setupTests() {
+    @BeforeAll
+    public static void setupTests() {
+        sqlMapAnimeDAO = new SqlMapAnimeDAO();
+    }
+
+    @Test
+    public void testFindAnime() {
+        Anime anime = sqlMapAnimeDAO.findAnime(8);
+        assertNotNull(anime);
     }
 
     @Test
@@ -26,7 +33,9 @@ public class AnimeDAOIntTest {
         anime.setCurrentEpisode(0);
         anime.setName("Princess Mononoke");
         anime.setTotalEpisodes(10);
-        Anime createdAnime = sqlMapAnimeDAO.create(anime);
+        Anime createdAnime = sqlMapAnimeDAO.findAnime(sqlMapAnimeDAO.create(anime));
+        System.out.println(anime);
+        System.out.println(createdAnime);
         assertNotNull(createdAnime.getAnimeId());
         assertEquals(createdAnime.getName(), anime.getName());
         assertEquals(createdAnime.getCurrentEpisode(), anime.getCurrentEpisode());
