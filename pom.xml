@@ -12,6 +12,10 @@
         <maven.compiler.target>11</maven.compiler.target>
         <junit.jupiter.version>5.8.1</junit.jupiter.version>
         <junit.platform.version>1.8.1</junit.platform.version>
+        <database.url>jdbc:postgresql://localhost:5432/postgres</database.url>
+        <database.user>postgres</database.user>
+        <!-- TODO: inject password -->
+        <database.password>zapper230</database.password>
     </properties>
 
     <dependencies>
@@ -38,14 +42,29 @@
             <version>4.13</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>8.0.5</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-core</artifactId>
-                <version>8.0.5</version>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>8.1.0</version>
+                <configuration>
+                    <sqlMigrationSeparator>__</sqlMigrationSeparator>
+                    <locations>
+                        <location>filesystem:\src\main\resources\db.migration\postgresql</location>
+                    </locations>
+                    <url>${database.url}</url>
+                    <user>${database.user}</user>
+                    <password>${database.password}</password>
+                    <schema>GameLogger</schema>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.postgresql</groupId>

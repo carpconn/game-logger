@@ -1,9 +1,0 @@
-CREATE TABLE achievement
-(
-    achievement_id INT NOT NULL,
-    game_id        INT NOT NULL,
-    title          varchar(128),
-    description    varchar(1024),
-    CONSTRAINT PK_achievement_id PRIMARY KEY (achievement_id),
-    CONSTRAINT FK_game_id FOREIGN KEY (game_id) REFERENCES game (game_id)
-);

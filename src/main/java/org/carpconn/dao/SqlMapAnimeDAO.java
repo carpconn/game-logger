@@ -9,19 +9,23 @@ import static java.util.Objects.isNull;
 /**
  * SqlMapAnimeDAO
  *
+ * The sql mapper implementation for the AnimeDAO.
+ *
  * @author carpc on 11/25/2021
  */
 public class SqlMapAnimeDAO implements AnimeDAO{
     private SqlSessionFactory factory;
 
     public SqlMapAnimeDAO(SqlSessionFactory factory) {
+        /* This factory should be a singleton; DO NOT duplicate a factory! */
         this.factory = factory;
     }
 
     @Override
     public Anime create(Anime anime) {
         SqlSession sqlSession = factory.openSession();
-        Anime createdAnime = this.findAnime(sqlSession.insert("AnimeDAO.create", anime));
+        AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
+        Anime createdAnime = animeDAO.create(anime);
         sqlSession.close();
         return createdAnime;
     }
@@ -29,7 +33,8 @@ public class SqlMapAnimeDAO implements AnimeDAO{
     @Override
     public Anime findAnime(int animeId) {
         SqlSession sqlSession = factory.openSession();
-        Anime findAnime = sqlSession.selectOne("AnimeDAO.findAnime", animeId);
+        AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
+        Anime findAnime = animeDAO.findAnime(animeId);
         sqlSession.close();
         return findAnime;
     }
@@ -37,7 +42,8 @@ public class SqlMapAnimeDAO implements AnimeDAO{
     @Override
     public Anime update(Anime anime) {
         SqlSession sqlSession = factory.openSession();
-        Anime updatedAnime = this.findAnime(sqlSession.update("AnimeDAO.update", anime));
+        AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
+        Anime updatedAnime = animeDAO.update(anime);
         sqlSession.close();
         return updatedAnime;
     }
@@ -45,7 +51,8 @@ public class SqlMapAnimeDAO implements AnimeDAO{
     @Override
     public boolean delete(int animeId) {
         SqlSession sqlSession = factory.openSession();
-        sqlSession.delete("AnimeDAO.delete", animeId);
+        AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
+        animeDAO.delete(animeId);
         sqlSession.close();
         return isNull(this.findAnime(animeId));
     }
