@@ -6,7 +6,7 @@
 <mapper namespace="org.carpconn.dao.AnimeDAO">
 
     <resultMap id="map" type="org.carpconn.model.Anime">
-        <id property="animeId" column="anime_id"/>
+        <id property="animeId" column="anime_id" javaType="int"/>
         <result property="totalEpisodes" column="total_episodes"/>
         <result property="currentEpisode" column="current_episode"/>
         <result property="name" column="name"/>
@@ -46,26 +46,38 @@
         <include refid="from"/>
     </sql>
 
+    <insert id="create" parameterType="org.carpconn.model.Anime" useGeneratedKeys="true" keyProperty="anime.animeId" keyColumn="anime_id">
+        INSERT INTO anime (total_episodes, current_episode, name, start_date, end_date, rating)
+        VALUES (#{anime.totalEpisodes}, #{anime.currentEpisode}, #{anime.name}, #{anime.startDate}, #{anime.endDate}, #{anime.rating})
+    </insert>
+
     <select id="findAnime" resultMap="map">
         <include refid="selectBase"/>
         WHERE anime.anime_id = #{animeId}
     </select>
 
+    <select id="findAll" resultMap="map">
+        <include refid="selectBase"/>
+    </select>
+
     <update id="update">
         UPDATE anime
         SET name = #{anime.name},
-            total_episodes = #{anime.totalEpsiodes},
-            current_episode = #{anime.currentEpisode},
+        <if test="anime.totalEpisodes != null">
+            total_episodes = #{anime.totalEpisodes},
+        </if>
+        <if test="anime.startDate != null">
             start_date = #{anime.startDate},
+        </if>
+        <if test="anime.endDate != null">
             end_date = #{anime.endDate},
-            rating = #{anime.rating}
+        </if>
+        <if test="anime.rating != null">
+            rating = #{anime.rating},
+        </if>
+            current_episode = #{anime.currentEpisode}
         WHERE anime_id = #{anime.animeId}
     </update>
-
-    <delete id="delete">
-        DELETE FROM anime
-        WHERE anime_id = #{animeId}
-    </delete>
 
 </mapper>
 

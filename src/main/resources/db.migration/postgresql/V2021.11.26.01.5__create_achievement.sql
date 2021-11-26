@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS achievement
 (
-    achievement_id INT PRIMARY KEY,
+    achievement_id SERIAL PRIMARY KEY,
     game_id        INT NOT NULL,
     title          varchar(128),
     description    varchar(1024),

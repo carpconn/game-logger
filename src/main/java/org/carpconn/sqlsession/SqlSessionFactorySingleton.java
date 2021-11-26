@@ -14,18 +14,15 @@ import java.io.IOException;
  * @author carpc on 11/25/2021
  */
 public class SqlSessionFactorySingleton {
-    private static SqlSessionFactory instance = null;
+    private static SqlSessionFactory instance;
 
     private SqlSessionFactorySingleton() {}
 
     public static SqlSessionFactory getInstance() {
-        if(instance == null) {
-            try {
-                instance = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mapper/sql-map-config.xml"));
-                return instance;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            instance = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mapper/sql-map-config.xml"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return instance;
     }

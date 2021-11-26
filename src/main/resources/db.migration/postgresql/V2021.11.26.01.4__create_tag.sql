@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS tag
 (
-    tag_id   INT PRIMARY KEY,
+    tag_id   SERIAL PRIMARY KEY,
     game_id  INT,
     anime_id INT,
     manga_id INT,
