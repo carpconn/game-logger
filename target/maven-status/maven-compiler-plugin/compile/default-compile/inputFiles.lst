@@ -1,14 +1,11 @@
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\model\Game.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\model\Tag.java
-C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\controllers\GameController.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\dao\SqlMapGameDAO.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\Main.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\dao\MangaDAO.java
-C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\controllers\AnimeController.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\dao\GameDAO.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\infrastructure\exceptions\ObjectExistsException.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\model\Manga.java
-C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\controllers\MangaController.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\dao\SqlMapMangaDAO.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\dao\SqlMapAnimeDAO.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\model\Anime.java
