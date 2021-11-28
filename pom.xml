@@ -15,7 +15,7 @@
         <database.url>jdbc:postgresql://localhost:5432/postgres</database.url>
         <database.user>postgres</database.user>
         <!-- TODO: inject password -->
-        <database.password>zapper230</database.password>
+        <database.password>postgres</database.password>
     </properties>
 
     <dependencies>
