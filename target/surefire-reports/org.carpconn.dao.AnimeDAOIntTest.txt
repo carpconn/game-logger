@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.carpconn.dao.AnimeDAOIntTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.198 s - in org.carpconn.dao.AnimeDAOIntTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.027 s - in org.carpconn.dao.AnimeDAOIntTest

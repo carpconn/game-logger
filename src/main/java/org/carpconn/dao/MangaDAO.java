@@ -3,6 +3,8 @@ package org.carpconn.dao;
 import org.apache.ibatis.annotations.Param;
 import org.carpconn.model.Manga;
 
+import java.util.List;
+
 /**
  * MangaDAO
  *
@@ -10,12 +12,14 @@ import org.carpconn.model.Manga;
  */
 public interface MangaDAO {
 
-    Manga create(@Param("manga") Manga manga);
+    Integer create(@Param("manga") Manga manga);
 
     Manga findManga(@Param("mangaId") int mangaId);
 
-    Manga update(@Param("manga") Manga manga);
+    void update(@Param("manga") Manga manga);
 
     void delete(@Param("mangaId") int mangaId);
+
+    List<Manga> findAll();
 
 }

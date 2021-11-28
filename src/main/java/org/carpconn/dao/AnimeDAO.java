@@ -1,6 +1,5 @@
 package org.carpconn.dao;
 
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.carpconn.model.Anime;
 
@@ -22,7 +21,6 @@ public interface AnimeDAO {
 
     void update(@Param("anime") Anime anime);
 
-    @Delete("DELETE FROM anime WHERE anime_id = #{animeId}")
     void delete(@Param("animeId") int animeId);
 
 }

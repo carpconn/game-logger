@@ -36,10 +36,10 @@ public class GameDAOIntTest {
         game.setName("__test_Skyrim");
         game.setHoursPlayed((double) 250);
 
-        int createdGameId = sqlMapGameDAO.create(game);
+        Integer createdGameId = sqlMapGameDAO.create(game);
+        assertNotNull(createdGameId);
 
         Game createdGame = sqlMapGameDAO.findGame(createdGameId);
-        assertNotNull(game.getGameId());
         assertEquals(game.getName(), createdGame.getName());
         assertEquals(game.getHoursPlayed(), createdGame.getHoursPlayed());
     }

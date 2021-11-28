@@ -79,5 +79,10 @@
         WHERE anime_id = #{anime.animeId}
     </update>
 
+    <delete id="delete">
+        DELETE FROM anime
+        WHERE anime_id = #{animeId}
+    </delete>
+
 </mapper>
 

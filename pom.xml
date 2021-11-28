@@ -14,7 +14,6 @@
         <junit.platform.version>1.8.1</junit.platform.version>
         <database.url>jdbc:postgresql://localhost:5432/postgres</database.url>
         <database.user>postgres</database.user>
-        <!-- TODO: inject password -->
         <database.password>postgres</database.password>
     </properties>
 

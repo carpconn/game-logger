@@ -2,6 +2,7 @@ org\carpconn\dao\SqlMapAnimeDAO.class
 org\carpconn\model\Manga.class
 org\carpconn\model\Tag.class
 org\carpconn\infrastructure\sqlsession\SqlSessionFactorySingleton.class
+org\carpconn\dao\SqlMapMangaDAO.class
 org\carpconn\Main.class
 org\carpconn\controllers\AnimeController.class
 org\carpconn\model\Anime.class

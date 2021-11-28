@@ -71,9 +71,15 @@
     <update id="update">
         UPDATE game
         SET name = #{game.name},
+        <if test="game.startDate != null">
             start_date = #{game.startDate},
+        </if>
+        <if test="game.endDate != null">
             end_date = #{game.endDate},
+        </if>
+        <if test="game.rating != null">
             rating = #{game.rating},
+        </if>
             hours_played = #{game.hoursPlayed}
         WHERE game_id = #{game.gameId}
     </update>

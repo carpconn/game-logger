@@ -9,6 +9,7 @@ C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\dao
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\infrastructure\exceptions\ObjectExistsException.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\model\Manga.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\controllers\MangaController.java
+C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\dao\SqlMapMangaDAO.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\dao\SqlMapAnimeDAO.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\model\Anime.java
 C:\Users\carpc\Documents\Personal Work\GameLogger\src\main\java\org\carpconn\infrastructure\sqlsession\SqlSessionFactorySingleton.java

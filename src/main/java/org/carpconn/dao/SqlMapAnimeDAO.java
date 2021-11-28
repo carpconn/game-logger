@@ -16,33 +16,30 @@ import static java.util.Objects.isNull;
  *
  * @author carpc on 11/25/2021
  */
-public class SqlMapAnimeDAO implements AnimeDAO{
-    private SqlSessionFactory factory;
+public class SqlMapAnimeDAO {
+    private final SqlSessionFactory sqlSessionFactory;
 
     public SqlMapAnimeDAO() {
         /* This factory should be a singleton; DO NOT duplicate a factory! */
-        factory = SqlSessionFactorySingleton.getInstance();
+        sqlSessionFactory = SqlSessionFactorySingleton.getInstance();
     }
 
-    @Override
     public Integer create(Anime anime) {
         try {
-            SqlSession sqlSession = factory.openSession();
+            SqlSession sqlSession = sqlSessionFactory.openSession();
             AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
             animeDAO.create(anime);
-            Integer createdAnimeId = anime.getAnimeId();
             sqlSession.commit();
-            return createdAnimeId;
+            return anime.getAnimeId();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    @Override
     public Anime findAnime(int animeId) {
         try {
-            SqlSession sqlSession = factory.openSession();
+            SqlSession sqlSession = sqlSessionFactory.openSession();
             AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
             Anime findAnime = animeDAO.findAnime(animeId);
             return findAnime;
@@ -52,10 +49,9 @@ public class SqlMapAnimeDAO implements AnimeDAO{
         return null;
     }
 
-    @Override
     public List<Anime> findAll() {
         try {
-            SqlSession sqlSession = factory.openSession();
+            SqlSession sqlSession = sqlSessionFactory.openSession();
             AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
             List<Anime> allAnime = animeDAO.findAll();
             return allAnime;
@@ -65,10 +61,9 @@ public class SqlMapAnimeDAO implements AnimeDAO{
         return null;
     }
 
-    @Override
     public void update(Anime anime) {
         try {
-            SqlSession sqlSession = factory.openSession();
+            SqlSession sqlSession = sqlSessionFactory.openSession();
             AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
             Anime updatee = animeDAO.findAnime(anime.getAnimeId());
             if(isNull(anime.getName())) {
@@ -99,10 +94,9 @@ public class SqlMapAnimeDAO implements AnimeDAO{
         }
     }
 
-    @Override
     public void delete(int animeId) {
         try {
-            SqlSession sqlSession = factory.openSession();
+            SqlSession sqlSession = sqlSessionFactory.openSession();
             AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
             animeDAO.delete(animeId);
             sqlSession.commit();

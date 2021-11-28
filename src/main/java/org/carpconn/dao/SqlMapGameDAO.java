@@ -17,7 +17,7 @@ import static java.util.Objects.isNull;
  * @author carpc on 11/27/2021
  */
 public class SqlMapGameDAO implements GameDAO {
-    private SqlSessionFactory sqlSessionFactory;
+    private final SqlSessionFactory sqlSessionFactory;
 
     public SqlMapGameDAO() {
         sqlSessionFactory = SqlSessionFactorySingleton.getInstance();
@@ -30,9 +30,8 @@ public class SqlMapGameDAO implements GameDAO {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             GameDAO gameDAO = sqlSession.getMapper(GameDAO.class);
             gameDAO.create(game);
-            Integer createdGameId = game.getGameId();
             sqlSession.commit();
-            return createdGameId;
+            return game.getGameId();
         } catch (Exception e) {
             e.printStackTrace();
         }
