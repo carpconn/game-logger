@@ -3,6 +3,8 @@ package org.carpconn.dao;
 import org.apache.ibatis.annotations.Param;
 import org.carpconn.model.Game;
 
+import java.util.List;
+
 /**
  * GameDAO
  *
@@ -10,12 +12,15 @@ import org.carpconn.model.Game;
  */
 public interface GameDAO {
 
-    Game create(@Param("game") Game game);
+    Integer create(@Param("game") Game game);
 
     Game findGame(@Param("gameId") int gameId);
 
-    Game update(@Param("game") Game game);
+    void update(@Param("game") Game game);
 
+//    TODO: make this available to users? And how to handle tag relations?
     void delete(@Param("gameId") int gameId);
+
+    List<Game> findAll();
 
 }

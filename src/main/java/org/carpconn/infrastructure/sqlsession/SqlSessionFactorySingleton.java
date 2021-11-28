@@ -1,4 +1,4 @@
-package org.carpconn.sqlsession;
+package org.carpconn.infrastructure.sqlsession;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;

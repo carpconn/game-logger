@@ -2,8 +2,8 @@ package org.carpconn.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.carpconn.infrastructure.sqlsession.SqlSessionFactorySingleton;
 import org.carpconn.model.Anime;
-import org.carpconn.sqlsession.SqlSessionFactorySingleton;
 
 import java.util.List;
 

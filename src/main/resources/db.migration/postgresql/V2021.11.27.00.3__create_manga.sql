@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS manga
     total_chapters  INT,
     start_date      DATE,
     end_date        DATE,
-    name            varchar(128) NOT NULL,
+    name            varchar(128) NOT NULL UNIQUE,
     rating          REAL
 );

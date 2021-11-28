@@ -29,15 +29,59 @@
         ga.hours_played
     </sql>
 
+    <sql id="tagsColumns">
+        ta.tag_id,
+        ta.name
+    </sql>
+
+    <sql id="achievementsColumns">
+        ac.achievement_id,
+        ac.title,
+        ac.description
+    </sql>
+
     <sql id="from">
         FROM game ga
+            LEFT JOIN tag ta ON ta.game_id = ga.game_id
+            LEFT JOIN achievement ac ON ac.game_id = ga.game_id
     </sql>
 
     <sql id="selectBase">
         SELECT
-        <include refid="gameColumns"/>
+        <include refid="gameColumns"/>,
+        <include refid="tagsColumns"/>,
+        <include refid="achievementsColumns"/>
         <include refid="from"/>
     </sql>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="game.gameId" keyColumn="game_id">
+        INSERT INTO game (name, start_date, end_date, rating, hours_played)
+        VALUES (#{game.name}, #{game.startDate}, #{game.endDate}, #{game.rating}, #{game.hoursPlayed})
+    </insert>
+
+    <select id="findGame" resultMap="map">
+        <include refid="selectBase"/>
+        WHERE ga.game_id = #{gameId}
+    </select>
+
+    <select id="findAll" resultMap="map">
+        <include refid="selectBase"/>
+    </select>
+
+    <update id="update">
+        UPDATE game
+        SET name = #{game.name},
+            start_date = #{game.startDate},
+            end_date = #{game.endDate},
+            rating = #{game.rating},
+            hours_played = #{game.hoursPlayed}
+        WHERE game_id = #{game.gameId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM game
+        WHERE game_id = #{gameId}
+    </delete>
 
 </mapper>
 

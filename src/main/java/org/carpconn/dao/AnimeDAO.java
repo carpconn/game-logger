@@ -15,6 +15,7 @@ public interface AnimeDAO {
 
     Integer create(@Param("anime") Anime anime);
 
+//    TODO: implement findByName query
     Anime findAnime(@Param("animeId") int animeId);
 
     List<Anime> findAll();

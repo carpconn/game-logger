@@ -1,8 +1,8 @@
 package org.carpconn.dao;
 
 import org.carpconn.model.Anime;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
@@ -17,18 +17,18 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class AnimeDAOIntTest {
 
-    static SqlMapAnimeDAO sqlMapAnimeDAO;
+    SqlMapAnimeDAO sqlMapAnimeDAO;
 
-    @BeforeAll
-    public static void setupTests() {
+    @BeforeEach
+    public void setUp() {
 //        TODO: create a test-specific singleton
         sqlMapAnimeDAO = new SqlMapAnimeDAO();
     }
 
-    @AfterAll
-    public static void teardown() {
+    @AfterEach
+    public void tearDown() {
         sqlMapAnimeDAO.findAll().forEach(anime -> {
-            if(anime.getName().contains("test_")) {
+            if(anime.getName().contains("__test_")) {
                 sqlMapAnimeDAO.delete(anime.getAnimeId());
             }
         });
@@ -38,7 +38,7 @@ public class AnimeDAOIntTest {
     public void testCreateFind() {
         Anime anime = new Anime();
         anime.setCurrentEpisode(0);
-        anime.setName("test_Princess Mononoke");
+        anime.setName("__test_Princess Mononoke");
         anime.setTotalEpisodes(10);
         Anime createdAnime = sqlMapAnimeDAO.findAnime(sqlMapAnimeDAO.create(anime));
         assertNotNull(createdAnime.getAnimeId());
@@ -50,7 +50,7 @@ public class AnimeDAOIntTest {
     @Test
     public void testUpdate() {
         Anime anime = new Anime();
-        anime.setName("test_Evangelion");
+        anime.setName("__test_Evangelion");
         anime.setCurrentEpisode(0);
         anime.setTotalEpisodes(25);
         anime.setRating(6.5);
@@ -73,5 +73,20 @@ public class AnimeDAOIntTest {
         assertEquals(7.0, updatedAnime.getRating());
         assertEquals(new Date(2021, Calendar.NOVEMBER, 24), updatedAnime.getStartDate());
         assertEquals(new Date(2021, Calendar.NOVEMBER, 26), updatedAnime.getEndDate());
+    }
+
+    @Test
+    public void testDelete() {
+        Anime anime = new Anime();
+        anime.setName("__test_Peter of Placid Forest");
+        anime.setCurrentEpisode(0);
+        anime.setTotalEpisodes(12);
+        anime.setRating(10.0);
+
+        Integer createdAnimeId = sqlMapAnimeDAO.create(anime);
+        assertNotNull(createdAnimeId);
+
+        sqlMapAnimeDAO.delete(anime.getAnimeId());
+        assertNull(sqlMapAnimeDAO.findAnime(createdAnimeId));
     }
 }
