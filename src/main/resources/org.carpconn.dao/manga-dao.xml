@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.carpconn.dao.MangaDAO">
+
+    <resultMap id="map" type="org.carpconn.model.Manga">
+        <id property="mangaId" column="manga_id"/>
+        <result property="totalChapters" column="total_chapters"/>
+        <result property="currentChapter" column="current_chapter"/>
+        <result property="name" column="name"/>
+        <result property="startDate" column="start_date" javaType="java.util.Date"/>
+        <result property="endDate" column="end_date" javaType="java.util.Date"/>
+        <result property="rating" column="rating"/>
+        <collection property="tags" javaType="ArrayList" ofType="org.carpconn.model.Tag">
+            <result column="tags"/>
+        </collection>
+    </resultMap>
+
+    <sql id="mangaColumns">
+        ma.manga_id,
+        ma.total_chapters,
+        ma.current_chapter,
+        ma.name,
+        ma.start_date,
+        ma.end_date,
+        ma.rating
+    </sql>
+
+    <sql id="tagsColumns">
+        ta.tag_id,
+        ta.name
+    </sql>
+
+    <sql id="from">
+        FROM manga ma
+            LEFT JOIN tag ta ON ta.manga_id = ma.manga_id
+    </sql>
+
+    <sql id="selectBase">
+        SELECT
+        <include refid="mangaColumns"/>,
+        <include refid="tagsColumns"/>
+        <include refid="from"/>
+    </sql>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="manga.mangaId" keyColumn="manga_id">
+        INSERT INTO manga (name, total_chapters, current_chapter, start_date, end_date, rating)
+        VALUES (#{manga.name}, #{manga.totalChapters}, #{manga.currentChapter}, #{manga.startDate}, #{manga.endDate}, #{manga.rating})
+    </insert>
+
+    <select id="findManga" resultMap="map">
+        <include refid="selectBase"/>
+        WHERE ma.manga_id = #{mangaId}
+    </select>
+
+    <select id="findAll" resultMap="map">
+        <include refid="selectBase"/>
+    </select>
+
+    <update id="update">
+        UPDATE manga
+        SET name = #{manga.name},
+        <if test="manga.startDate != null">
+            start_date = #{manga.startDate},
+        </if>
+        <if test="manga.endDate != null">
+            end_date = #{manga.endDate},
+        </if>
+        <if test="manga.rating != null">
+            rating = #{manga.rating},
+        </if>
+            total_chapters = #{manga.totalChapters},
+            current_chapter = #{manga.currentChapter}
+        WHERE manga_id = #{manga.mangaId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM manga
+        WHERE manga_id = #{mangaId}
+    </delete>
+
+</mapper>
+
+

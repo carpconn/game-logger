@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.carpconn.dao.GameDAO">
+
+    <resultMap id="map" type="org.carpconn.model.Game">
+        <id property="gameId" column="game_id"/>
+        <result property="name" column="name"/>
+        <result property="startDate" column="start_date" javaType="java.util.Date"/>
+        <result property="endDate" column="end_date" javaType="java.util.Date"/>
+        <result property="rating" column="rating"/>
+        <result property="hoursPlayed" column="hours_played"/>
+        <collection property="tags" javaType="ArrayList" ofType="org.carpconn.model.Tag">
+            <result column="tags"/>
+        </collection>
+        <collection property="achievements" javaType="ArrayList" ofType="org.carpconn.model.Achievement">
+            <result column="achievements"/>
+        </collection>
+    </resultMap>
+
+    <sql id="gameColumns">
+        ga.game_id,
+        ga.name,
+        ga.start_date,
+        ga.end_date,
+        ga.rating,
+        ga.hours_played
+    </sql>
+
+    <sql id="tagsColumns">
+        ta.tag_id,
+        ta.name
+    </sql>
+
+    <sql id="achievementsColumns">
+        ac.achievement_id,
+        ac.title,
+        ac.description
+    </sql>
+
+    <sql id="from">
+        FROM game ga
+            LEFT JOIN tag ta ON ta.game_id = ga.game_id
+            LEFT JOIN achievement ac ON ac.game_id = ga.game_id
+    </sql>
+
+    <sql id="selectBase">
+        SELECT
+        <include refid="gameColumns"/>,
+        <include refid="tagsColumns"/>,
+        <include refid="achievementsColumns"/>
+        <include refid="from"/>
+    </sql>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="game.gameId" keyColumn="game_id">
+        INSERT INTO game (name, start_date, end_date, rating, hours_played)
+        VALUES (#{game.name}, #{game.startDate}, #{game.endDate}, #{game.rating}, #{game.hoursPlayed})
+    </insert>
+
+    <select id="findGame" resultMap="map">
+        <include refid="selectBase"/>
+        WHERE ga.game_id = #{gameId}
+    </select>
+
+    <select id="findAll" resultMap="map">
+        <include refid="selectBase"/>
+    </select>
+
+    <update id="update">
+        UPDATE game
+        SET name = #{game.name},
+        <if test="game.startDate != null">
+            start_date = #{game.startDate},
+        </if>
+        <if test="game.endDate != null">
+            end_date = #{game.endDate},
+        </if>
+        <if test="game.rating != null">
+            rating = #{game.rating},
+        </if>
+            hours_played = #{game.hoursPlayed}
+        WHERE game_id = #{game.gameId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM game
+        WHERE game_id = #{gameId}
+    </delete>
+
+</mapper>
+
+

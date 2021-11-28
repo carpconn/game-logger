@@ -1,0 +1,17 @@
+org\carpconn\dao\SqlMapAnimeDAO.class
+org\carpconn\model\Manga.class
+org\carpconn\model\Tag.class
+org\carpconn\infrastructure\sqlsession\SqlSessionFactorySingleton.class
+org\carpconn\dao\SqlMapMangaDAO.class
+org\carpconn\Main.class
+org\carpconn\controllers\AnimeController.class
+org\carpconn\model\Anime.class
+org\carpconn\model\Achievement.class
+org\carpconn\dao\GameDAO.class
+org\carpconn\dao\MangaDAO.class
+org\carpconn\model\Game.class
+org\carpconn\infrastructure\exceptions\ObjectExistsException.class
+org\carpconn\controllers\MangaController.class
+org\carpconn\controllers\GameController.class
+org\carpconn\dao\SqlMapGameDAO.class
+org\carpconn\dao\AnimeDAO.class
