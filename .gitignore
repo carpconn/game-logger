@@ -23,7 +23,7 @@
 hs_err_pid*
 
 # ignore .idea directory
-./.idea/
+.idea/
 
 # ignore target directory
-./target/
+target/
