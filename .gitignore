@@ -25,5 +25,6 @@ hs_err_pid*
 # ignore .idea directory
 .idea/
 
-# ignore target directory
-target/
+# ignore target directories
+backend/target/
+game-logger-ui/target/
