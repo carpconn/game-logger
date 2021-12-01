@@ -18,7 +18,6 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <flyway.maven.plugin.version>8.1.0</flyway.maven.plugin.version>
         <database.url>jdbc:postgresql://localhost:5432/postgres</database.url>
         <database.user>postgres</database.user>
         <database.password>postgres</database.password>
@@ -68,12 +67,15 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>${flyway.maven.plugin.version}</version>
+                <version>8.1.0</version>
                 <configuration>
                     <sqlMigrationSeparator>__</sqlMigrationSeparator>
                     <locations>
                         <location>filesystem:\src\main\resources\db.migration\postgresql</location>
                     </locations>
+                    <schemas>
+                        <schema>game-logger-schema</schema>
+                    </schemas>
                     <url>${database.url}</url>
                     <user>${database.user}</user>
                     <password>${database.password}</password>
