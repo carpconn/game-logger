@@ -1,4 +1,4 @@
-CREATE TABLE achievement_game
+CREATE TABLE IF NOT EXISTS achievement_game
 (
     achievement_id INT NOT NULL,
     game_id        INT NOT NULL,

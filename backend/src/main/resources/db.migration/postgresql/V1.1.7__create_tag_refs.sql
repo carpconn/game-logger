@@ -1,4 +1,4 @@
-CREATE TABLE tag_refs
+CREATE TABLE IF NOT EXISTS tag_refs
 (
     tag_ref_id INT NOT NULL,
     game_id    INT,
