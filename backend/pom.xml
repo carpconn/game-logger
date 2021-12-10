@@ -18,14 +18,14 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <database.url>jdbc:postgresql://localhost:5432/postgres</database.url>
-        <database.user>postgres</database.user>
-        <database.password>postgres</database.password>
+        <database.url>jdbc:h2:~/cache</database.url>
+        <database.user/>
+        <database.password/>
 
         <mybatis.maven.version>3.5.7</mybatis.maven.version>
-        <flywaydb.maven.version>8.0.5</flywaydb.maven.version>
-        <postgresql.maven.version>42.3.1</postgresql.maven.version>
+        <flywaydb.maven.version>8.1.0</flywaydb.maven.version>
         <junit.jupiter.version>5.8.1</junit.jupiter.version>
+        <h2.maven.version>1.4.200</h2.maven.version>
     </properties>
 
     <dependencies>
@@ -56,9 +56,9 @@
             <version>${flywaydb.maven.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.maven.version}</version>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.maven.version}</version>
         </dependency>
     </dependencies>
 
@@ -71,20 +71,17 @@
                 <configuration>
                     <sqlMigrationSeparator>__</sqlMigrationSeparator>
                     <locations>
-                        <location>filesystem:\src\main\resources\db.migration\postgresql</location>
+                        <location>filesystem:\src\main\resources\db.migration.h2</location>
                     </locations>
-                    <schemas>
-                        <schema>game-logger-schema</schema>
-                    </schemas>
                     <url>${database.url}</url>
                     <user>${database.user}</user>
                     <password>${database.password}</password>
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>org.postgresql</groupId>
-                        <artifactId>postgresql</artifactId>
-                        <version>${postgresql.maven.version}</version>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>${h2.maven.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

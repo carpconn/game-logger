@@ -9,12 +9,12 @@
         <id property="mangaId" column="manga_id"/>
         <result property="totalChapters" column="total_chapters"/>
         <result property="currentChapter" column="current_chapter"/>
-        <result property="name" column="name"/>
+        <result property="name" column="manga_name"/>
         <result property="startDate" column="start_date" javaType="java.util.Date"/>
         <result property="endDate" column="end_date" javaType="java.util.Date"/>
         <result property="rating" column="rating"/>
         <collection property="tags" javaType="ArrayList" ofType="org.carpconn.model.Tag">
-            <result column="tags"/>
+            <result column="tag_id"/>
         </collection>
     </resultMap>
 
@@ -22,7 +22,7 @@
         ma.manga_id,
         ma.total_chapters,
         ma.current_chapter,
-        ma.name,
+        ma.manga_name,
         ma.start_date,
         ma.end_date,
         ma.rating
@@ -35,7 +35,8 @@
 
     <sql id="from">
         FROM manga ma
-            LEFT JOIN tag ta ON ta.manga_id = ma.manga_id
+            LEFT JOIN tag_refs tar ON ma.manga_id = tar.manga_id
+            LEFT JOIN tag ta ON tar.tag_id = ta.tag_id
     </sql>
 
     <sql id="selectBase">
@@ -46,7 +47,7 @@
     </sql>
 
     <insert id="create" useGeneratedKeys="true" keyProperty="manga.mangaId" keyColumn="manga_id">
-        INSERT INTO manga (name, total_chapters, current_chapter, start_date, end_date, rating)
+        INSERT INTO manga (manga_name, total_chapters, current_chapter, start_date, end_date, rating)
         VALUES (#{manga.name}, #{manga.totalChapters}, #{manga.currentChapter}, #{manga.startDate}, #{manga.endDate}, #{manga.rating})
     </insert>
 
@@ -61,7 +62,7 @@
 
     <update id="update">
         UPDATE manga
-        SET name = #{manga.name},
+        SET manga_name = #{manga.name},
         <if test="manga.startDate != null">
             start_date = #{manga.startDate},
         </if>

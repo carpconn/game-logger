@@ -9,7 +9,7 @@ import java.util.Objects;
  *
  * @author carpc on 11/23/2021
  */
-public class Anime {
+public class Anime extends GenericLogger {
     private Integer animeId;
     private List<Tag> tags;
     private Integer totalEpisodes;
@@ -83,7 +83,7 @@ public class Anime {
     }
 
     public void setRating(Double rating) {
-        this.rating = rating;
+        this.rating = this.formatRating(rating);
     }
 
     @Override

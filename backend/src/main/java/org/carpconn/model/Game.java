@@ -9,7 +9,7 @@ import java.util.Objects;
  *
  * @author carpc on 11/23/2021
  */
-public class Game {
+public class Game extends GenericLogger {
     private Integer gameId;
     private String name;
     private Date startDate;
@@ -83,7 +83,7 @@ public class Game {
     }
 
     public void setRating(Double rating) {
-        this.rating = rating;
+        this.rating = this.formatRating(rating);
     }
 
     @Override

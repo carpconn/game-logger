@@ -1,5 +1,7 @@
 package org.carpconn.model;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +11,7 @@ import java.util.Objects;
  *
  * @author carpc on 11/23/2021
  */
-public class Manga {
+public class Manga extends GenericLogger {
     private Integer mangaId;
     private List<Tag> tags;
     private Integer currentChapter;
@@ -67,7 +69,7 @@ public class Manga {
     }
 
     public void setRating(Double rating) {
-        this.rating = rating;
+        this.rating = this.formatRating(rating);
     }
 
     public Date getStartDate() {
