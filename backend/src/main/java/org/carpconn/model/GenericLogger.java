@@ -23,8 +23,7 @@ public class GenericLogger {
      * @return the formatted rating, to the tenths place
      */
     public Double formatRating(Double rating) {
-
-        df.setRoundingMode(RoundingMode.CEILING);
+        df.setRoundingMode(RoundingMode.HALF_UP);
         return Double.parseDouble(df.format(rating));
     }
 }
