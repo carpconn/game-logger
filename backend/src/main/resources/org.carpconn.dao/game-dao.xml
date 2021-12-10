@@ -7,7 +7,7 @@
 
     <resultMap id="map" type="org.carpconn.model.Game">
         <id property="gameId" column="game_id"/>
-        <result property="name" column="name"/>
+        <result property="name" column="game_name"/>
         <result property="startDate" column="start_date" javaType="java.util.Date"/>
         <result property="endDate" column="end_date" javaType="java.util.Date"/>
         <result property="rating" column="rating"/>
@@ -22,7 +22,7 @@
 
     <sql id="gameColumns">
         ga.game_id,
-        ga.name,
+        ga.game_name,
         ga.start_date,
         ga.end_date,
         ga.rating,
@@ -42,8 +42,10 @@
 
     <sql id="from">
         FROM game ga
-            LEFT JOIN tag ta ON ta.game_id = ga.game_id
-            LEFT JOIN achievement ac ON ac.game_id = ga.game_id
+            LEFT JOIN tag_refs tar ON tar.game_id = ga.game_id
+            LEFT JOIN tag ta ON tar.tag_id = ta.tag_id
+            LEFT JOIN achievement_game ag ON ga.game_id = ag.game_id
+            LEFT JOIN achievement ac ON ag.achievement_id = ac.achievement_id
     </sql>
 
     <sql id="selectBase">
@@ -55,7 +57,7 @@
     </sql>
 
     <insert id="create" useGeneratedKeys="true" keyProperty="game.gameId" keyColumn="game_id">
-        INSERT INTO game (name, start_date, end_date, rating, hours_played)
+        INSERT INTO game (game_name, start_date, end_date, rating, hours_played)
         VALUES (#{game.name}, #{game.startDate}, #{game.endDate}, #{game.rating}, #{game.hoursPlayed})
     </insert>
 
@@ -70,7 +72,7 @@
 
     <update id="update">
         UPDATE game
-        SET name = #{game.name},
+        SET game_name = #{game.name},
         <if test="game.startDate != null">
             start_date = #{game.startDate},
         </if>

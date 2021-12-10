@@ -9,7 +9,7 @@
         <id property="animeId" column="anime_id" javaType="int"/>
         <result property="totalEpisodes" column="total_episodes"/>
         <result property="currentEpisode" column="current_episode"/>
-        <result property="name" column="name"/>
+        <result property="name" column="anime_name"/>
         <result property="startDate" column="start_date" javaType="java.util.Date"/>
         <result property="endDate" column="end_date" javaType="java.util.Date"/>
         <result property="rating" column="rating"/>
@@ -19,24 +19,24 @@
     </resultMap>
 
     <sql id="animeColumns">
-        anime.anime_id,
-        anime.total_episodes,
-        anime.current_episode,
-        anime.name,
-        anime.start_date,
-        anime.end_date,
-        anime.rating
+        an.anime_id,
+        an.total_episodes,
+        an.current_episode,
+        an.anime_name,
+        an.start_date,
+        an.end_date,
+        an.rating
     </sql>
 
     <sql id="tagColumns">
-        tag.tag_id,
-        tag.anime_id,
-        tag.name
+        ta.tag_id,
+        ta.name
     </sql>
 
     <sql id="from">
-        FROM anime
-            LEFT JOIN tag ON anime.anime_id = tag.anime_id
+        FROM anime an
+            LEFT JOIN tag_refs tar ON an.anime_id = tar.anime_id
+            LEFT JOIN tag ta ON tar.tag_id = ta.tag_id
     </sql>
 
     <sql id="selectBase">
@@ -47,13 +47,13 @@
     </sql>
 
     <insert id="create" parameterType="org.carpconn.model.Anime" useGeneratedKeys="true" keyProperty="anime.animeId" keyColumn="anime_id">
-        INSERT INTO anime (total_episodes, current_episode, name, start_date, end_date, rating)
+        INSERT INTO anime (total_episodes, current_episode, anime_name, start_date, end_date, rating)
         VALUES (#{anime.totalEpisodes}, #{anime.currentEpisode}, #{anime.name}, #{anime.startDate}, #{anime.endDate}, #{anime.rating})
     </insert>
 
     <select id="findAnime" resultMap="map">
         <include refid="selectBase"/>
-        WHERE anime.anime_id = #{animeId}
+        WHERE an.anime_id = #{animeId}
     </select>
 
     <select id="findAll" resultMap="map">
@@ -62,7 +62,7 @@
 
     <update id="update">
         UPDATE anime
-        SET name = #{anime.name},
+        SET anime_name = #{anime.name},
         <if test="anime.totalEpisodes != null">
             total_episodes = #{anime.totalEpisodes},
         </if>

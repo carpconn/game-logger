@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS achievement_game
+CREATE TABLE achievement_game
 (
     achievement_id INT NOT NULL,
     game_id        INT NOT NULL,
@@ -6,3 +6,4 @@ CREATE TABLE IF NOT EXISTS achievement_game
     CONSTRAINT FK_achievement_id FOREIGN KEY (achievement_id) REFERENCES achievement,
     CONSTRAINT FK_game_id FOREIGN KEY (game_id) REFERENCES game
 );
+
