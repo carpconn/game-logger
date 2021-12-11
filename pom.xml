@@ -10,6 +10,7 @@
     <modules>
         <module>backend</module>
         <module>ui</module>
+        <module>assembly</module>
     </modules>
 
     <properties>
@@ -20,6 +21,11 @@
         <javafx.maven.version>11</javafx.maven.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
         <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+
+        <!--    Child module versions    -->
+        <game-logger-backend.version>0.0.1-SNAPSHOT</game-logger-backend.version>
+        <game-logger-ui.version>0.0.1-SNAPSHOT</game-logger-ui.version>
+        <game-logger-assembly.version>0.0.1-SNAPSHOT</game-logger-assembly.version>
     </properties>
 
 </project>

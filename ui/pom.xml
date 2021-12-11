@@ -10,9 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>game-logger-ui</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <name>game-logger-ui</name>
     <description>The UI for the Game Logger project. Main class located in game-logger-backend.</description>
+    <version>${game-logger-ui.version}</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
