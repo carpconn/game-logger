@@ -11,25 +11,38 @@
 
     <artifactId>game-logger-ui</artifactId>
     <packaging>jar</packaging>
-    <name>game-logger-ui</name>
-    <description>The UI for the Game Logger project. Main class located in game-logger-backend.</description>
+    <description>The UI for the Game Logger project.</description>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+
+        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+        <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
+        <javafx.controls.maven.version>17</javafx.controls.maven.version>
+        <javafx.fxml.maven.version>17.0.1</javafx.fxml.maven.version>
+        <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>${javafx.maven.version}</version>
+            <version>${javafx.controls.maven.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>${maven.assembly.plugin.version}</version>
+            <type>maven-plugin</type>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>${javafx.maven.version}</version>
+            <version>17.0.1</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -44,7 +57,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>game-logger-backend/org.carpconn.Main</mainClass>
+                    <mainClass>org.carpconn.JavaFXRunner</mainClass>
                 </configuration>
             </plugin>
         </plugins>
