@@ -26,6 +26,6 @@ hs_err_pid*
 .idea/
 
 # ignore target directories
-../target/
+assembly/target/
 backend/target/
 ui/target/

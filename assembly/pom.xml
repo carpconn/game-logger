@@ -11,14 +11,16 @@
 
     <artifactId>game-logger-assembly</artifactId>
     <packaging>pom</packaging>
-    <version>${game-logger-assembly.version</version>
+    <description>The assembler for the Game Logger project.</description>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
-
-
+        <game-logger-backend.version>0.0.1-SNAPSHOT</game-logger-backend.version>
+        <game-logger-ui.version>0.0.1-SNAPSHOT</game-logger-ui.version>
     </properties>
 
     <dependencies>
@@ -26,6 +28,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-assembly-plugin</artifactId>
             <version>${maven.assembly.plugin.version}</version>
+            <type>maven-plugin</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -47,17 +50,23 @@
                 <version>3.3.0</version>
                 <executions>
                     <execution>
+                        <id>assembly</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>src.resources.game-logger-assembly.xml</descriptor>
-                            </descriptors>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.carpconn.JavaFXRunner</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
             </plugin>
         </plugins>
     </build>
