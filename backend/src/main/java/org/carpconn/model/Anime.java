@@ -1,5 +1,7 @@
 package org.carpconn.model;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -10,23 +12,23 @@ import java.util.Objects;
  * @author carpc on 11/23/2021
  */
 public class Anime extends GenericLogger {
-    private Integer animeId;
+    private Long animeId;
     private List<Tag> tags;
     private Integer totalEpisodes;
     private Integer currentEpisode;
     private String name;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private Double rating;
 
     public Anime() {
     }
 
-    public Integer getAnimeId() {
+    public Long getAnimeId() {
         return animeId;
     }
 
-    public void setAnimeId(Integer animeId) {
+    public void setAnimeId(Long animeId) {
         this.animeId = animeId;
     }
 
@@ -62,19 +64,19 @@ public class Anime extends GenericLogger {
         this.name = name;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

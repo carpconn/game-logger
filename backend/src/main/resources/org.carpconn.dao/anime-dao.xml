@@ -6,12 +6,12 @@
 <mapper namespace="org.carpconn.dao.AnimeDAO">
 
     <resultMap id="map" type="org.carpconn.model.Anime">
-        <id property="animeId" column="anime_id" javaType="int"/>
+        <id property="animeId" column="anime_id" javaType="long"/>
         <result property="totalEpisodes" column="total_episodes"/>
         <result property="currentEpisode" column="current_episode"/>
         <result property="name" column="anime_name"/>
-        <result property="startDate" column="start_date" javaType="java.util.Date"/>
-        <result property="endDate" column="end_date" javaType="java.util.Date"/>
+        <result property="startDate" column="start_date" javaType="java.time.LocalDateTime"/>
+        <result property="endDate" column="end_date" javaType="java.time.LocalDateTime"/>
         <result property="rating" column="rating"/>
         <collection property="tags" javaType="ArrayList" ofType="org.carpconn.model.Tag">
             <result column="tags"/>
@@ -53,7 +53,7 @@
 
     <select id="findAnime" resultMap="map">
         <include refid="selectBase"/>
-        WHERE an.anime_id = #{animeId}
+        WHERE an.anime_id = #{animeId, jdbcType=BIGINT}
     </select>
 
     <select id="findAll" resultMap="map">
@@ -67,21 +67,21 @@
             total_episodes = #{anime.totalEpisodes},
         </if>
         <if test="anime.startDate != null">
-            start_date = #{anime.startDate},
+            start_date = #{anime.startDate, jdbcType=DATETIMEOFFSET},
         </if>
         <if test="anime.endDate != null">
-            end_date = #{anime.endDate},
+            end_date = #{anime.endDate, jdbcType=DATETIMEOFFSET},
         </if>
         <if test="anime.rating != null">
             rating = #{anime.rating},
         </if>
             current_episode = #{anime.currentEpisode}
-        WHERE anime_id = #{anime.animeId}
+        WHERE anime_id = #{anime.animeId, jdbcType=BIGINT}
     </update>
 
     <delete id="delete">
         DELETE FROM anime
-        WHERE anime_id = #{animeId}
+        WHERE anime_id = #{animeId, jdbcType=BIGINT}
     </delete>
 
 </mapper>

@@ -8,18 +8,18 @@ import java.util.Objects;
  * @author carpc on 11/23/2021
  */
 public class Achievement {
-    private Integer achievementId;
+    private Long achievementId;
     private String title;
     private String description;
 
     public Achievement() {
     }
 
-    public Integer getAchievementId() {
+    public Long getAchievementId() {
         return achievementId;
     }
 
-    public void setAchievementId(Integer achievementId) {
+    public void setAchievementId(Long achievementId) {
         this.achievementId = achievementId;
     }
 

@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
  *
  * @author carpc on 11/25/2021
  */
-public class SqlMapAnimeDAO {
+public class SqlMapAnimeDAO implements AnimeDAO {
     private final SqlSessionFactory sqlSessionFactory;
 
     public SqlMapAnimeDAO() {
@@ -24,7 +24,11 @@ public class SqlMapAnimeDAO {
         sqlSessionFactory = SqlSessionFactorySingleton.getInstance();
     }
 
-    public Integer create(Anime anime) {
+    public SqlMapAnimeDAO(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
+    }
+
+    public Long create(Anime anime) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
@@ -37,7 +41,7 @@ public class SqlMapAnimeDAO {
         return null;
     }
 
-    public Anime findAnime(int animeId) {
+    public Anime findAnime(Long animeId) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);
@@ -94,7 +98,7 @@ public class SqlMapAnimeDAO {
         }
     }
 
-    public void delete(int animeId) {
+    public void delete(Long animeId) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             AnimeDAO animeDAO = sqlSession.getMapper(AnimeDAO.class);

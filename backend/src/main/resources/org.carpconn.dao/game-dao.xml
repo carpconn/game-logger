@@ -6,10 +6,10 @@
 <mapper namespace="org.carpconn.dao.GameDAO">
 
     <resultMap id="map" type="org.carpconn.model.Game">
-        <id property="gameId" column="game_id"/>
+        <id property="gameId" column="game_id" javaType="long"/>
         <result property="name" column="game_name"/>
-        <result property="startDate" column="start_date" javaType="java.util.Date"/>
-        <result property="endDate" column="end_date" javaType="java.util.Date"/>
+        <result property="startDate" column="start_date" javaType="java.time.LocalDateTime"/>
+        <result property="endDate" column="end_date" javaType="java.time.LocalDateTime"/>
         <result property="rating" column="rating"/>
         <result property="hoursPlayed" column="hours_played"/>
         <collection property="tags" javaType="ArrayList" ofType="org.carpconn.model.Tag">
@@ -63,7 +63,7 @@
 
     <select id="findGame" resultMap="map">
         <include refid="selectBase"/>
-        WHERE ga.game_id = #{gameId}
+        WHERE ga.game_id = #{gameId, jdbcType=BIGINT}
     </select>
 
     <select id="findAll" resultMap="map">
@@ -74,21 +74,21 @@
         UPDATE game
         SET game_name = #{game.name},
         <if test="game.startDate != null">
-            start_date = #{game.startDate},
+            start_date = #{game.startDate, jdbcType=DATETIMEOFFSET},
         </if>
         <if test="game.endDate != null">
-            end_date = #{game.endDate},
+            end_date = #{game.endDate, jdbcType=DATETIMEOFFSET},
         </if>
         <if test="game.rating != null">
             rating = #{game.rating},
         </if>
             hours_played = #{game.hoursPlayed}
-        WHERE game_id = #{game.gameId}
+        WHERE game_id = #{game.gameId, jdbcType=BIGINT}
     </update>
 
     <delete id="delete">
         DELETE FROM game
-        WHERE game_id = #{gameId}
+        WHERE game_id = #{gameId, jdbcType=BIGINT}
     </delete>
 
 </mapper>

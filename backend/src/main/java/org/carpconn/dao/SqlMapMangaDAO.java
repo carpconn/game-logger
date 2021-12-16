@@ -22,13 +22,17 @@ public class SqlMapMangaDAO implements MangaDAO {
         sqlSessionFactory = SqlSessionFactorySingleton.getInstance();
     }
 
+    public SqlMapMangaDAO(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
+    }
+
     @Override
-    public Integer create(Manga manga) {
+    public Long create(Manga manga) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             MangaDAO mangaDAO = sqlSession.getMapper(MangaDAO.class);
             mangaDAO.create(manga);
-            Integer createdMangaId = manga.getMangaId();
+            Long createdMangaId = manga.getMangaId();
             sqlSession.commit();
             return createdMangaId;
         } catch (Exception e) {
@@ -38,7 +42,7 @@ public class SqlMapMangaDAO implements MangaDAO {
     }
 
     @Override
-    public Manga findManga(int mangaId) {
+    public Manga findManga(Long mangaId) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             MangaDAO mangaDAO = sqlSession.getMapper(MangaDAO.class);
@@ -85,7 +89,7 @@ public class SqlMapMangaDAO implements MangaDAO {
     }
 
     @Override
-    public void delete(int mangaId) {
+    public void delete(Long mangaId) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             MangaDAO mangaDAO = sqlSession.getMapper(MangaDAO.class);

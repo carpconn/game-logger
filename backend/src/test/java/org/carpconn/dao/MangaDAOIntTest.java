@@ -1,5 +1,6 @@
 package org.carpconn.dao;
 
+import org.carpconn.SqlSessionFactoryTestingSingleton;
 import org.carpconn.model.Manga;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,7 @@ public class MangaDAOIntTest {
 
     @BeforeEach
     void setUp() {
-        sqlMapMangaDAO = new SqlMapMangaDAO();
+        sqlMapMangaDAO = new SqlMapMangaDAO(SqlSessionFactoryTestingSingleton.getInstance());
     }
 
     @AfterEach
@@ -42,7 +43,7 @@ public class MangaDAOIntTest {
         manga.setTotalChapters(80);
         manga.setCurrentChapter(0);
 
-        Integer createdMangaId = sqlMapMangaDAO.create(manga);
+        Long createdMangaId = sqlMapMangaDAO.create(manga);
         assertNotNull(createdMangaId);
 
         Manga createdManga = sqlMapMangaDAO.findManga(createdMangaId);
@@ -57,16 +58,14 @@ public class MangaDAOIntTest {
         manga.setName("__test_The Greatest Manga of All Time");
         manga.setCurrentChapter(0);
         manga.setTotalChapters(35);
-        manga.setStartDate(new Date(2021, Calendar.DECEMBER, 5));
 
-        Integer createdMangaId = sqlMapMangaDAO.create(manga);
+        Long createdMangaId = sqlMapMangaDAO.create(manga);
 
         Manga updateManga = new Manga();
         updateManga.setMangaId(createdMangaId);
         updateManga.setName("__test_This Manga Actually Isn't Too Great");
         updateManga.setCurrentChapter(35);
         updateManga.setRating(3.3);
-        updateManga.setEndDate(new Date(2021, Calendar.DECEMBER, 22));
         sqlMapMangaDAO.update(updateManga);
 
         Manga updatedManga = sqlMapMangaDAO.findManga(createdMangaId);
@@ -84,7 +83,7 @@ public class MangaDAOIntTest {
         manga.setCurrentChapter(0);
         manga.setTotalChapters(0);
 
-        Integer createdMangaId = sqlMapMangaDAO.create(manga);
+        Long createdMangaId = sqlMapMangaDAO.create(manga);
         assertNotNull(createdMangaId);
 
         sqlMapMangaDAO.delete(createdMangaId);

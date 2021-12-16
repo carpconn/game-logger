@@ -1,5 +1,7 @@
 package org.carpconn.model;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -10,10 +12,10 @@ import java.util.Objects;
  * @author carpc on 11/23/2021
  */
 public class Game extends GenericLogger {
-    private Integer gameId;
+    private Long gameId;
     private String name;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private List<Achievement> achievements;
     private List<Tag> tags;
     private Double hoursPlayed;
@@ -22,7 +24,7 @@ public class Game extends GenericLogger {
     public Game() {
     }
 
-    public Integer getGameId() {
+    public Long getGameId() {
         return gameId;
     }
 
@@ -30,11 +32,11 @@ public class Game extends GenericLogger {
         return name;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
@@ -54,7 +56,7 @@ public class Game extends GenericLogger {
         return rating;
     }
 
-    public void setGameId(Integer gameId) {
+    public void setGameId(Long gameId) {
         this.gameId = gameId;
     }
 
@@ -62,11 +64,11 @@ public class Game extends GenericLogger {
         this.name = name;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

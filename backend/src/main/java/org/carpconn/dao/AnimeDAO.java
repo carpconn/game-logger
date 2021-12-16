@@ -12,15 +12,15 @@ import java.util.List;
  */
 public interface AnimeDAO {
 
-    Integer create(@Param("anime") Anime anime);
+    Long create(@Param("anime") Anime anime);
 
 //    TODO: implement findByName query
-    Anime findAnime(@Param("animeId") int animeId);
+    Anime findAnime(@Param("animeId") Long animeId);
 
     List<Anime> findAll();
 
     void update(@Param("anime") Anime anime);
 
-    void delete(@Param("animeId") int animeId);
+    void delete(@Param("animeId") Long animeId);
 
 }

@@ -12,14 +12,14 @@ import java.util.List;
  */
 public interface GameDAO {
 
-    Integer create(@Param("game") Game game);
+    Long create(@Param("game") Game game);
 
-    Game findGame(@Param("gameId") int gameId);
+    Game findGame(@Param("gameId") Long gameId);
 
     void update(@Param("game") Game game);
 
 //    TODO: make this available to users? And how to handle tag relations?
-    void delete(@Param("gameId") int gameId);
+    void delete(@Param("gameId") Long gameId);
 
     List<Game> findAll();
 

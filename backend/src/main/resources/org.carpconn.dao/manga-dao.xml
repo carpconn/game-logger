@@ -6,12 +6,12 @@
 <mapper namespace="org.carpconn.dao.MangaDAO">
 
     <resultMap id="map" type="org.carpconn.model.Manga">
-        <id property="mangaId" column="manga_id"/>
+        <id property="mangaId" column="manga_id" javaType="long"/>
         <result property="totalChapters" column="total_chapters"/>
         <result property="currentChapter" column="current_chapter"/>
         <result property="name" column="manga_name"/>
-        <result property="startDate" column="start_date" javaType="java.util.Date"/>
-        <result property="endDate" column="end_date" javaType="java.util.Date"/>
+        <result property="startDate" column="start_date" javaType="java.time.LocalDateTime"/>
+        <result property="endDate" column="end_date" javaType="java.time.LocalDateTime"/>
         <result property="rating" column="rating"/>
         <collection property="tags" javaType="ArrayList" ofType="org.carpconn.model.Tag">
             <result column="tag_id"/>
@@ -53,7 +53,7 @@
 
     <select id="findManga" resultMap="map">
         <include refid="selectBase"/>
-        WHERE ma.manga_id = #{mangaId}
+        WHERE ma.manga_id = #{mangaId, jdbcType=BIGINT}
     </select>
 
     <select id="findAll" resultMap="map">
@@ -64,22 +64,22 @@
         UPDATE manga
         SET manga_name = #{manga.name},
         <if test="manga.startDate != null">
-            start_date = #{manga.startDate},
+            start_date = #{manga.startDate, jdbcType=DATETIMEOFFSET},
         </if>
         <if test="manga.endDate != null">
-            end_date = #{manga.endDate},
+            end_date = #{manga.endDate, jdbcType=DATETIMEOFFSET},
         </if>
         <if test="manga.rating != null">
             rating = #{manga.rating},
         </if>
             total_chapters = #{manga.totalChapters},
             current_chapter = #{manga.currentChapter}
-        WHERE manga_id = #{manga.mangaId}
+        WHERE manga_id = #{manga.mangaId, jdbcType=BIGINT}
     </update>
 
     <delete id="delete">
         DELETE FROM manga
-        WHERE manga_id = #{mangaId}
+        WHERE manga_id = #{mangaId, jdbcType=BIGINT}
     </delete>
 
 </mapper>

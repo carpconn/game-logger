@@ -18,7 +18,8 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <database.url>jdbc:h2:~/cache</database.url>
+        <database.testing.url>jdbc:h2:~/test</database.testing.url>
+        <database.cache.url>jdbc:h2:~/cache</database.cache.url>
         <database.user/>
         <database.password/>
 
@@ -60,6 +61,43 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>testing</id>
+            <activation>
+                <property>
+                    <name>environment</name>
+                    <value>test</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                        <version>8.1.0</version>
+                        <configuration>
+                            <sqlMigrationSeparator>__</sqlMigrationSeparator>
+                            <locations>
+                                <location>filesystem:\src\main\resources\db.migration.h2</location>
+                            </locations>
+                            <url>${database.testing.url}</url>
+                            <user>${database.user}</user>
+                            <password>${database.password}</password>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.h2database</groupId>
+                                <artifactId>h2</artifactId>
+                                <version>${h2.maven.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -71,7 +109,7 @@
                     <locations>
                         <location>filesystem:\src\main\resources\db.migration.h2</location>
                     </locations>
-                    <url>${database.url}</url>
+                    <url>${database.cache.url}</url>
                     <user>${database.user}</user>
                     <password>${database.password}</password>
                 </configuration>

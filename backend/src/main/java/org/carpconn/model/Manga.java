@@ -2,6 +2,9 @@ package org.carpconn.model;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -12,23 +15,23 @@ import java.util.Objects;
  * @author carpc on 11/23/2021
  */
 public class Manga extends GenericLogger {
-    private Integer mangaId;
+    private Long mangaId;
     private List<Tag> tags;
     private Integer currentChapter;
     private Integer totalChapters;
     private String name;
     private Double rating;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     public Manga() {
     }
 
-    public Integer getMangaId() {
+    public Long getMangaId() {
         return mangaId;
     }
 
-    public void setMangaId(Integer mangaId) {
+    public void setMangaId(Long mangaId) {
         this.mangaId = mangaId;
     }
 
@@ -72,19 +75,19 @@ public class Manga extends GenericLogger {
         this.rating = this.formatRating(rating);
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

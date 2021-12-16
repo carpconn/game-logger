@@ -23,9 +23,12 @@ public class SqlMapGameDAO implements GameDAO {
         sqlSessionFactory = SqlSessionFactorySingleton.getInstance();
     }
 
+    public SqlMapGameDAO(SqlSessionFactory sqlSessionFactory) {
+        this.sqlSessionFactory = sqlSessionFactory;
+    }
 
     @Override
-    public Integer create(Game game) {
+    public Long create(Game game) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             GameDAO gameDAO = sqlSession.getMapper(GameDAO.class);
@@ -39,7 +42,7 @@ public class SqlMapGameDAO implements GameDAO {
     }
 
     @Override
-    public Game findGame(int gameId) {
+    public Game findGame(Long gameId) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             GameDAO gameDAO = sqlSession.getMapper(GameDAO.class);
@@ -86,7 +89,7 @@ public class SqlMapGameDAO implements GameDAO {
     }
 
     @Override
-    public void delete(int gameId) {
+    public void delete(Long gameId) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
             GameDAO gameDAO = sqlSession.getMapper(GameDAO.class);
