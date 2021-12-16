@@ -21,7 +21,6 @@
         <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
         <javafx.controls.maven.version>17</javafx.controls.maven.version>
-        <javafx.fxml.maven.version>17.0.1</javafx.fxml.maven.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
     </properties>
 
@@ -37,12 +36,6 @@
             <version>${maven.assembly.plugin.version}</version>
             <type>maven-plugin</type>
         </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>17.0.1</version>
-        </dependency>
-
     </dependencies>
 
     <build>
