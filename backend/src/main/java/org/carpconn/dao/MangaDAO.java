@@ -12,13 +12,13 @@ import java.util.List;
  */
 public interface MangaDAO {
 
-    Integer create(@Param("manga") Manga manga);
+    Long create(@Param("manga") Manga manga);
 
-    Manga findManga(@Param("mangaId") int mangaId);
+    Manga findManga(@Param("mangaId") Long mangaId);
 
     void update(@Param("manga") Manga manga);
 
-    void delete(@Param("mangaId") int mangaId);
+    void delete(@Param("mangaId") Long mangaId);
 
     List<Manga> findAll();
 

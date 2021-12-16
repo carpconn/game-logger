@@ -1,12 +1,13 @@
 package org.carpconn.dao;
 
+import org.carpconn.SqlSessionFactoryTestingSingleton;
 import org.carpconn.model.Anime;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +23,7 @@ public class AnimeDAOIntTest {
     @BeforeEach
     public void setUp() {
 //        TODO: create a test-specific singleton
-        sqlMapAnimeDAO = new SqlMapAnimeDAO();
+        sqlMapAnimeDAO = new SqlMapAnimeDAO(SqlSessionFactoryTestingSingleton.getInstance());
     }
 
     @AfterEach
@@ -54,15 +55,30 @@ public class AnimeDAOIntTest {
         anime.setCurrentEpisode(0);
         anime.setTotalEpisodes(25);
         anime.setRating(6.5);
-        anime.setStartDate(new Date(2021, Calendar.NOVEMBER, 24));
+        LocalDateTime startDate = LocalDateTime.now()
+                                              .withDayOfMonth(15)
+                                              .withMonth(Calendar.DECEMBER)
+                                              .withHour(5)
+                                              .withMinute(30)
+                                              .withSecond(0)
+                                              .withNano(0);
+        anime.setStartDate(startDate);
 
-        int createdAnimeId = sqlMapAnimeDAO.create(anime);
+        Long createdAnimeId = sqlMapAnimeDAO.create(anime);
+
+        LocalDateTime endDate = LocalDateTime.now()
+                                             .withDayOfMonth(30)
+                                             .withMonth(Calendar.DECEMBER)
+                                             .withHour(3)
+                                             .withMinute(0)
+                                             .withSecond(0)
+                                             .withNano(0);
 
         Anime updateAnime = new Anime();
         updateAnime.setAnimeId(createdAnimeId);
         updateAnime.setCurrentEpisode(25);
         updateAnime.setRating(7.0);
-        updateAnime.setEndDate(new Date(2021, Calendar.NOVEMBER, 26));
+        updateAnime.setEndDate(endDate);
 
         sqlMapAnimeDAO.update(updateAnime);
         Anime updatedAnime = sqlMapAnimeDAO.findAnime(createdAnimeId);
@@ -71,8 +87,8 @@ public class AnimeDAOIntTest {
         assertEquals(anime.getTotalEpisodes(), updatedAnime.getTotalEpisodes());
         assertEquals(25, updatedAnime.getCurrentEpisode());
         assertEquals(7.0, updatedAnime.getRating());
-        assertEquals(new Date(2021, Calendar.NOVEMBER, 24), updatedAnime.getStartDate());
-        assertEquals(new Date(2021, Calendar.NOVEMBER, 26), updatedAnime.getEndDate());
+        assertEquals(anime.getStartDate(), updatedAnime.getStartDate());
+        assertEquals(endDate, updatedAnime.getEndDate());
     }
 
     @Test
@@ -83,7 +99,7 @@ public class AnimeDAOIntTest {
         anime.setTotalEpisodes(12);
         anime.setRating(10.0);
 
-        Integer createdAnimeId = sqlMapAnimeDAO.create(anime);
+        Long createdAnimeId = sqlMapAnimeDAO.create(anime);
         assertNotNull(createdAnimeId);
 
         sqlMapAnimeDAO.delete(anime.getAnimeId());

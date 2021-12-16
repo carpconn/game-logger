@@ -1,5 +1,6 @@
 package org.carpconn.dao;
 
+import org.carpconn.SqlSessionFactoryTestingSingleton;
 import org.carpconn.model.Game;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ public class GameDAOIntTest {
 
     @BeforeEach
     void setUp() {
-        sqlMapGameDAO = new SqlMapGameDAO();
+        sqlMapGameDAO = new SqlMapGameDAO(SqlSessionFactoryTestingSingleton.getInstance());
     }
 
     @AfterEach
@@ -36,7 +37,7 @@ public class GameDAOIntTest {
         game.setName("__test_Skyrim");
         game.setHoursPlayed((double) 250);
 
-        Integer createdGameId = sqlMapGameDAO.create(game);
+        Long createdGameId = sqlMapGameDAO.create(game);
         assertNotNull(createdGameId);
 
         Game createdGame = sqlMapGameDAO.findGame(createdGameId);
@@ -51,7 +52,7 @@ public class GameDAOIntTest {
         game.setHoursPlayed(1.5);
         game.setRating(8.5);
 
-        Integer createdGameId = sqlMapGameDAO.create(game);
+        Long createdGameId = sqlMapGameDAO.create(game);
         assertNotNull(createdGameId);
 
         Game updateGame = new Game();
@@ -75,7 +76,7 @@ public class GameDAOIntTest {
         game.setName("__test_The Fun Game TM");
         game.setHoursPlayed(15.75);
 
-        Integer createdGameId = sqlMapGameDAO.create(game);
+        Long createdGameId = sqlMapGameDAO.create(game);
         assertNotNull(createdGameId);
 
         sqlMapGameDAO.delete(createdGameId);
