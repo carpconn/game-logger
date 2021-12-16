@@ -8,17 +8,17 @@ import java.util.Objects;
  * @author carpc on 11/23/2021
  */
 public class Tag {
-    private Integer tagId;
+    private Long tagId;
     private String name;
 
     public Tag() {
     }
 
-    public Integer getTagId() {
+    public Long getTagId() {
         return tagId;
     }
 
-    public void setTagId(Integer tagId) {
+    public void setTagId(Long tagId) {
         this.tagId = tagId;
     }
 
